@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+<Base title="Saram Hai" description="Agent architecture, orchestration and production LLM systems.">
+  <h1>Writing</h1>
+  <p class="lede">Agent architecture, orchestration, and the parts of building with LLMs that only show up at scale.</p>
+  <ul class="posts">
+    {posts.map((p) => (
+      <li>
+        <a href={`/${p.id}`}>{p.data.title}</a>
+        <p class="muted" style="margin:.2em 0">{p.data.description}</p>
+        <time>{p.data.pubDate.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}</time>
+        <div class="tags">{p.data.tags.map((t) => <span class="tag">{t}</span>)}</div>
+      </li>
+    ))}
+  </ul>
+</Base>

@@ -1,0 +1,30 @@
+---
+const { title, description } = Astro.props;
+const url = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : Astro.url.pathname;
+import '../styles/global.css';
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={url} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+</head>
+<body>
+  <header class="site"><div class="wrap">
+    <a class="brand" href="/">Saram Hai</a>
+    <nav><a href="/">Writing</a><a href="/about">About</a><a href="https://linkedin.com/in/saram-hai-ai">LinkedIn</a></nav>
+  </div></header>
+  <main class="wrap"><slot /></main>
+  <footer class="site"><div class="wrap">
+    Saram Hai, CTO at <a href="https://thebotss.com">The Botss</a>. Agentic AI systems in production.
+  </div></footer>
+</body>
+</html>

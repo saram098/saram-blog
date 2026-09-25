@@ -1,0 +1,13 @@
+---
+import Base from './Base.astro';
+const { frontmatter } = Astro.props;
+const d = new Date(frontmatter.pubDate).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+---
+<Base title={frontmatter.title} description={frontmatter.description}>
+  <article>
+    <h1>{frontmatter.title}</h1>
+    <time>{d}</time>
+    {frontmatter.cover && <p><img src={frontmatter.cover} alt={frontmatter.title} /></p>}
+    <slot />
+  </article>
+</Base>
